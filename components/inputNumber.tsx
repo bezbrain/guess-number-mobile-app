@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import { randomNumber } from "../utils/randomNumber";
+import CustomBtn from "./customBtn";
 
 const InputNumber = () => {
   const [isText, setIsText] = useState("");
@@ -27,21 +28,7 @@ const InputNumber = () => {
           />
         </View>
 
-        <View style={styles.customBtnContainer}>
-          <View style={styles.customSubmitBtn}>
-            <Text
-              style={{
-                textAlign: "center",
-                color: "#105210",
-                fontWeight: "bold",
-                padding: 5,
-              }}
-              onPress={handleSubmitNumber}
-            >
-              Submit
-            </Text>
-          </View>
-        </View>
+        <CustomBtn handleSubmitNumber={handleSubmitNumber} />
 
         <Text style={styles.textTrials}>Trials: {numberOfTrials}</Text>
       </View>
@@ -73,22 +60,10 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "#105210",
   },
-  customBtnContainer: {
-    marginTop: 20,
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  customSubmitBtn: {
-    width: 100,
-    borderWidth: 2,
-    borderColor: "#105210",
-    borderRadius: 8,
-  },
   textTrials: {
     textAlign: "center",
     marginTop: 20,
     fontSize: 20,
-    color: "#105210",
+    color: "#c51c1c",
   },
 });

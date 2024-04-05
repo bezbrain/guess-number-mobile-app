@@ -2,6 +2,7 @@ import React, { SetStateAction, Dispatch, useState } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import { randomNumber } from "../utils/randomNumber";
 import CustomBtn from "./customBtn";
+import { ErrorMsg } from "./";
 
 interface InputNumberProps {
   setRandomNumber: Dispatch<SetStateAction<number>>;
@@ -10,13 +11,18 @@ interface InputNumberProps {
 const InputNumber = ({ setRandomNumber }: InputNumberProps) => {
   const [isText, setIsText] = useState("");
   const [numbersPicked, setNumberPicked] = useState([]);
+  const [isError, setIsError] = useState(false);
 
   const handleInputText = (text: string) => {
-    setIsText(text);
+    if (text.length <= 1) {
+      setIsText(text);
+      setIsError(false);
+      return;
+    }
+    setIsError(true);
   };
 
   const handleSubmitNumber = () => {
-    // console.log(randomNumber());
     const random = randomNumber();
     setRandomNumber(random);
   };
@@ -30,8 +36,11 @@ const InputNumber = ({ setRandomNumber }: InputNumberProps) => {
             style={styles.inputText}
             keyboardType="numeric"
             onChangeText={handleInputText}
+            value={isText}
           />
         </View>
+
+        {isError && <ErrorMsg />}
 
         <CustomBtn handleSubmitNumber={handleSubmitNumber} />
       </View>

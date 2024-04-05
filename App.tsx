@@ -11,7 +11,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <StatusBar style="auto" /> */}
+      <StatusBar style="auto" />
       <Text style={styles.gameHeader}>Guess the Number game</Text>
 
       <InputNumber
@@ -21,10 +21,15 @@ export default function App() {
         setIsText={setIsText}
         numberOfTrial={numberOfTrials}
         setNumberOfTrial={setNumberOfTrial}
+        chosenNum={isText}
+        randomNum={randomNum}
       />
 
       {numberOfTrials === 0 ? (
-        <Text style={styles.textTrials}>You have reached trial limit</Text>
+        <>
+          <Text style={styles.textTrials}>You have reached trial limit</Text>
+          <Text style={styles.textOver}>GAME OVER</Text>
+        </>
       ) : (
         <Text style={styles.textTrials}>Trials: {numberOfTrials}</Text>
       )}
@@ -36,11 +41,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     marginVertical: 70,
-    // backgroundColor: "#fff",
-    // alignItems: "center",
-    // justifyContent: "center",
   },
   gameHeader: {
     textAlign: "center",
@@ -52,5 +53,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 20,
     color: "#c51c1c",
+  },
+  textOver: {
+    textAlign: "center",
+    marginTop: 10,
+    fontSize: 20,
+    color: "#c51c1c",
+    fontWeight: "bold",
   },
 });

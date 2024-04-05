@@ -11,6 +11,8 @@ interface InputNumberProps {
   isText: string;
   numberOfTrial: number;
   setNumberOfTrial: Dispatch<SetStateAction<number>>;
+  chosenNum: string;
+  randomNum: number;
 }
 
 const InputNumber = ({
@@ -20,6 +22,8 @@ const InputNumber = ({
   setIsText,
   numberOfTrial,
   setNumberOfTrial,
+  chosenNum,
+  randomNum,
 }: InputNumberProps) => {
   const [numbersPicked, setNumberPicked] = useState([]);
   const [isError, setIsError] = useState(false);
@@ -55,12 +59,26 @@ const InputNumber = ({
       return;
     }
 
+    // Set trial back to 5 on click of restart btn
+    if (btnContent === "Restart") {
+      setNumberOfTrial(5);
+      setBtnContent("Submit");
+      return;
+    }
+
     // Check if player has reached trial limit
     if (numberOfTrial === 0) {
       setIsResult(false);
       setBtnContent("Restart");
       return;
     }
+
+    // If number chosen is same as the random number, then reset number of trial
+    if (Number(chosenNum) === randomNum) {
+      setNumberOfTrial(5);
+      return;
+    }
+
     setIsResult(true);
     setNumberOfTrial(numberOfTrial - 1);
   };

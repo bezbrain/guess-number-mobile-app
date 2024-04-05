@@ -1,19 +1,24 @@
-import React, { useState } from "react";
+import React, { SetStateAction, Dispatch, useState } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import { randomNumber } from "../utils/randomNumber";
 import CustomBtn from "./customBtn";
 
-const InputNumber = () => {
+interface InputNumberProps {
+  setRandomNumber: Dispatch<SetStateAction<number>>;
+}
+
+const InputNumber = ({ setRandomNumber }: InputNumberProps) => {
   const [isText, setIsText] = useState("");
   const [numbersPicked, setNumberPicked] = useState([]);
-  const [numberOfTrials, setNumberOfTrial] = useState(5);
 
   const handleInputText = (text: string) => {
     setIsText(text);
   };
 
   const handleSubmitNumber = () => {
-    console.log(randomNumber());
+    // console.log(randomNumber());
+    const random = randomNumber();
+    setRandomNumber(random);
   };
 
   return (
@@ -29,8 +34,6 @@ const InputNumber = () => {
         </View>
 
         <CustomBtn handleSubmitNumber={handleSubmitNumber} />
-
-        <Text style={styles.textTrials}>Trials: {numberOfTrials}</Text>
       </View>
     </ScrollView>
   );
@@ -59,11 +62,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 25,
     color: "#105210",
-  },
-  textTrials: {
-    textAlign: "center",
-    marginTop: 20,
-    fontSize: 20,
-    color: "#c51c1c",
   },
 });

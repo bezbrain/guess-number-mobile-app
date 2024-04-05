@@ -1,8 +1,12 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
 
-const ErrorMsg = () => {
-  return <Text style={styles.error}>You can only pick one digit</Text>;
+interface ErrorMsgProp {
+  errorMsg: string;
+}
+
+const ErrorMsg = ({ errorMsg }: ErrorMsgProp) => {
+  return <Text style={styles.error}>{errorMsg}</Text>;
 };
 
 export default ErrorMsg;

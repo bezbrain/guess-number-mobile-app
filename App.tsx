@@ -6,16 +6,30 @@ import { useState } from "react";
 export default function App() {
   const [numberOfTrials, setNumberOfTrial] = useState(5);
   const [randomNum, setRandomNum] = useState(0);
+  const [isResult, setIsResult] = useState(false);
+  const [isText, setIsText] = useState("");
 
   return (
     <View style={styles.container}>
       {/* <StatusBar style="auto" /> */}
       <Text style={styles.gameHeader}>Guess the Number game</Text>
-      <InputNumber setRandomNumber={setRandomNum} />
 
-      <Text style={styles.textTrials}>Trials: {numberOfTrials}</Text>
+      <InputNumber
+        setRandomNumber={setRandomNum}
+        setIsResult={setIsResult}
+        isText={isText}
+        setIsText={setIsText}
+        numberOfTrial={numberOfTrials}
+        setNumberOfTrial={setNumberOfTrial}
+      />
 
-      <Result randomNumber={randomNum} />
+      {numberOfTrials === 0 ? (
+        <Text style={styles.textTrials}>You have reached trial limit</Text>
+      ) : (
+        <Text style={styles.textTrials}>Trials: {numberOfTrials}</Text>
+      )}
+
+      {isResult && <Result randomNumber={randomNum} chosenNumber={isText} />}
     </View>
   );
 }

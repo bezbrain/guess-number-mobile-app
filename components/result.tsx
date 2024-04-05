@@ -3,14 +3,15 @@ import { StyleSheet, Text, View } from "react-native";
 
 interface ResultProps {
   randomNumber: number;
+  chosenNumber: string;
 }
 
-const Result = ({ randomNumber }: ResultProps) => {
+const Result = ({ randomNumber, chosenNumber }: ResultProps) => {
   return (
     <View style={styles.resultContainer}>
       <Text style={styles.resultText}>
-        You chose <Text style={styles.youChose}>5</Text> but the real number is{" "}
-        <Text style={styles.resultShown}>{randomNumber}</Text>
+        You chose <Text style={styles.youChose}>{chosenNumber}</Text> but the
+        real number is <Text style={styles.resultShown}>{randomNumber}</Text>
       </Text>
     </View>
   );

@@ -3,9 +3,10 @@ import { View, Text, StyleSheet } from "react-native";
 
 interface CustomBtnProps {
   handleSubmitNumber: () => void;
+  btnContent: string;
 }
 
-const CustomBtn = ({ handleSubmitNumber }: CustomBtnProps) => {
+const CustomBtn = ({ handleSubmitNumber, btnContent }: CustomBtnProps) => {
   return (
     <View style={styles.customBtnContainer}>
       <View style={styles.customSubmitBtn}>
@@ -18,7 +19,7 @@ const CustomBtn = ({ handleSubmitNumber }: CustomBtnProps) => {
           }}
           onPress={handleSubmitNumber}
         >
-          Submit
+          {btnContent}
         </Text>
       </View>
     </View>

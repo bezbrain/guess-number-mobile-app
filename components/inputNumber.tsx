@@ -1,4 +1,4 @@
-import React, { SetStateAction, Dispatch, useState } from "react";
+import React, { SetStateAction, Dispatch, useState, useEffect } from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import { randomNumber } from "../utils/randomNumber";
 import CustomBtn from "./customBtn";
@@ -13,6 +13,7 @@ interface InputNumberProps {
   setNumberOfTrial: Dispatch<SetStateAction<number>>;
   chosenNum: string;
   randomNum: number;
+  isResult: boolean;
 }
 
 const InputNumber = ({
@@ -24,11 +25,14 @@ const InputNumber = ({
   setNumberOfTrial,
   chosenNum,
   randomNum,
+  isResult,
 }: InputNumberProps) => {
   const [numbersPicked, setNumberPicked] = useState([]);
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [btnContent, setBtnContent] = useState("Submit");
+
+  const [otherStateController, setOtherStateController] = useState(false);
 
   //   HANDLE INPUT TEXT CHANGE
   const handleInputText = (text: string) => {
@@ -59,6 +63,12 @@ const InputNumber = ({
       return;
     }
 
+    // If number chosen is same as the random number, then reset number of trial
+    if (Number(chosenNum) === randomNum) {
+      setNumberOfTrial(5);
+      return;
+    }
+
     // Set trial back to 5 on click of restart btn
     if (btnContent === "Restart") {
       setNumberOfTrial(5);
@@ -66,22 +76,18 @@ const InputNumber = ({
       return;
     }
 
+    setIsResult(true);
+    setNumberOfTrial(numberOfTrial - 1);
+  };
+
+  useEffect(() => {
     // Check if player has reached trial limit
     if (numberOfTrial === 0) {
       setIsResult(false);
       setBtnContent("Restart");
       return;
     }
-
-    // If number chosen is same as the random number, then reset number of trial
-    if (Number(chosenNum) === randomNum) {
-      setNumberOfTrial(5);
-      return;
-    }
-
-    setIsResult(true);
-    setNumberOfTrial(numberOfTrial - 1);
-  };
+  }, [numberOfTrial == 0]);
 
   return (
     <ScrollView>

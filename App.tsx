@@ -16,6 +16,7 @@ export default function App() {
 
       <InputNumber
         setRandomNumber={setRandomNum}
+        isResult={isResult}
         setIsResult={setIsResult}
         isText={isText}
         setIsText={setIsText}

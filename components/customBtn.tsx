@@ -30,8 +30,7 @@ export default CustomBtn;
 
 const styles = StyleSheet.create({
   customBtnContainer: {
-    marginTop: 20,
-    flex: 1,
+    marginTop: 10,
     justifyContent: "center",
     alignItems: "center",
   },

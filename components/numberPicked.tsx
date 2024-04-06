@@ -3,12 +3,15 @@ import { View, Text, StyleSheet } from "react-native";
 
 interface NumberPickedProps {
   numberChosen: string;
+  count: number;
 }
 
-const NumberPicked = ({ numberChosen }: NumberPickedProps) => {
+const NumberPicked = ({ numberChosen, count }: NumberPickedProps) => {
   return (
     <View style={styles.historyNumberCon}>
-      <Text style={styles.numberText}>1. Chose {numberChosen}</Text>
+      <Text style={styles.numberText}>
+        {count}. You Chose {numberChosen}
+      </Text>
       <Text style={styles.icon}></Text>
     </View>
   );
@@ -25,6 +28,7 @@ const styles = StyleSheet.create({
     padding: 12,
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 15,
   },
   numberText: {
     fontSize: 20,

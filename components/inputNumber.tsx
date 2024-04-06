@@ -1,5 +1,13 @@
 import React, { SetStateAction, Dispatch, useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
 import { randomNumber } from "../utils/randomNumber";
 import CustomBtn from "./customBtn";
 import ErrorMsg from "./messages/errorMsg";
@@ -14,6 +22,7 @@ interface InputNumberProps {
   chosenNum: string;
   randomNum: number;
   isResult: boolean;
+  setNumberPicked: Dispatch<SetStateAction<{ id: number; text: string }[]>>;
 }
 
 const InputNumber = ({
@@ -25,14 +34,11 @@ const InputNumber = ({
   setNumberOfTrial,
   chosenNum,
   randomNum,
-  isResult,
+  setNumberPicked,
 }: InputNumberProps) => {
-  const [numbersPicked, setNumberPicked] = useState([]);
   const [isError, setIsError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [btnContent, setBtnContent] = useState("Submit");
-
-  const [otherStateController, setOtherStateController] = useState(false);
 
   //   HANDLE INPUT TEXT CHANGE
   const handleInputText = (text: string) => {
@@ -78,6 +84,14 @@ const InputNumber = ({
 
     setIsResult(true);
     setNumberOfTrial(numberOfTrial - 1);
+
+    setNumberPicked((currentNumberPicked) => [
+      ...currentNumberPicked,
+      {
+        id: Date.now(),
+        text: isText,
+      },
+    ]);
   };
 
   useEffect(() => {
@@ -90,8 +104,8 @@ const InputNumber = ({
   }, [numberOfTrial == 0]);
 
   return (
-    <ScrollView>
-      <View>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.mainInputCon}>
         <Text style={styles.inputInstruction}>Type number between 0 - 9</Text>
         <View style={styles.inputContainer}>
           <TextInput
@@ -109,13 +123,16 @@ const InputNumber = ({
           btnContent={btnContent}
         />
       </View>
-    </ScrollView>
+    </TouchableWithoutFeedback>
   );
 };
 
 export default InputNumber;
 
 const styles = StyleSheet.create({
+  mainInputCon: {
+    // flex: 2,
+  },
   inputInstruction: {
     textAlign: "center",
     fontSize: 18,

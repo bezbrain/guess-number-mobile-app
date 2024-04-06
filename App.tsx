@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { InputNumber, Result } from "./components";
+import { InputNumber, NumberPicked, Result } from "./components";
 import { useState } from "react";
 
 export default function App() {
@@ -36,6 +36,10 @@ export default function App() {
       )}
 
       {isResult && <Result randomNumber={randomNum} chosenNumber={isText} />}
+
+      <Text style={styles.numbersPicked}>Previous Number Picked</Text>
+
+      <NumberPicked numberChosen={isText} />
     </View>
   );
 }
@@ -43,6 +47,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 70,
+    padding: 10,
   },
   gameHeader: {
     textAlign: "center",
@@ -61,5 +66,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#c51c1c",
     fontWeight: "bold",
+  },
+  numbersPicked: {
+    textAlign: "center",
+    fontSize: 25,
+    marginTop: 25,
+    marginBottom: 15,
   },
 });

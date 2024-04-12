@@ -8,23 +8,16 @@ interface AllNumbersPickedProps {
 
 const AllNumbersPicked = ({ allNumbers }: AllNumbersPickedProps) => {
   return (
-    // <View style={styles.content}>
-    <ScrollView style={styles.scrollView}>
+    <ScrollView>
       {allNumbers.map((each, i) => (
         <NumberPicked numberChosen={each.text} key={each.id} count={i + 1} />
       ))}
     </ScrollView>
-    // </View>
   );
 };
 
 export default AllNumbersPicked;
 
 const styles = StyleSheet.create({
-  scrollView: {
-    // flex: 1,
-  },
-  content: {
-    // flex: 1,
-  },
+  //
 });

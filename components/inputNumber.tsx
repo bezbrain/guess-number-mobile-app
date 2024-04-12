@@ -105,7 +105,7 @@ const InputNumber = ({
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.mainInputCon}>
+      <View>
         <Text style={styles.inputInstruction}>Type number between 0 - 9</Text>
         <View style={styles.inputContainer}>
           <TextInput
@@ -130,9 +130,6 @@ const InputNumber = ({
 export default InputNumber;
 
 const styles = StyleSheet.create({
-  mainInputCon: {
-    // flex: 2,
-  },
   inputInstruction: {
     textAlign: "center",
     fontSize: 18,

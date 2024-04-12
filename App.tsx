@@ -92,5 +92,6 @@ const styles = StyleSheet.create({
   },
   lower: {
     flex: 1.5,
+    // marginTop: 0,
   },
 });

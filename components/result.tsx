@@ -21,7 +21,7 @@ export default Result;
 
 const styles = StyleSheet.create({
   resultContainer: {
-    marginTop: 20,
+    marginTop: 10,
   },
   resultText: {
     textAlign: "center",
